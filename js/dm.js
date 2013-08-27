@@ -115,7 +115,7 @@ function DmToolbar(debugmode, globalOptions, options) {
 		countId : 'dt_lots_classes',
 		countShow : 'count_dt_lots_classes',
 		maxCountController : 'dt_classes_max_count',
-		pathToControllerFunction : this.options.pluginsDir + 'debugmode/js/modules/domclassuncorrect.js' 
+		pathToControllerFunction : this.options.pluginsDir + 'debugmode/js/deffered/domclassuncorrect.js' 
 	}
 
 	// info for function calculates DOM level count
@@ -123,7 +123,7 @@ function DmToolbar(debugmode, globalOptions, options) {
 		countId : 'dt_level_count',
 		countShow : 'count_dt_level_count',
 		maxCountController : 'dt_level_max_count',
-		pathToControllerFunction : this.options.pluginsDir + 'debugmode/js/modules/domleveluncorrect.js' 
+		pathToControllerFunction : this.options.pluginsDir + 'debugmode/js/deffered/domleveluncorrect.js' 
 	};
 
 	// info for common operations
