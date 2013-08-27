@@ -1,12 +1,17 @@
 
 /* Debugg styles
+
+hi == html-inspector
+his == html-inspector settings
+
 ---------------------------------------------------------------------------------- */
 .dm_error,
 .dm_dom-level_error,
 .dm_class_count_error,
-.dm_dom_level_error{
+.dm_dom_level_error,
+.dm_hi_error {
      outline:5px solid red;
-}
+    }
 
 .dm_dtoolbar{
     position: absolute;
@@ -17,7 +22,6 @@
     border: 3px solid #E6E6E6;
     white-space: nowrap;
     }
-    
 .ie8 .dm_dtoolbar,
 *+HTML {
     background-color: #FFF;
@@ -50,6 +54,11 @@
     opacity: 1;
     visibility: visible;
     
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    
     -webkit-transition: .4s opacity,visibility .5s;
        -moz-transition: .4s opacity,visibility .5s;
          -o-transition: .4s opacity,visibility .5s;
@@ -59,14 +68,14 @@
         opacity: 0;
         visibility: hidden;
         }
-.debugbar_bottom:hover{
+.debugbar_bottom:hover {
     background-color:rgba(255, 255, 255, 1);
     }
-    .debugbar_bottom_inner{
+    .debugbar_bottom_inner {
         position: relative;
         overflow:auto;
         }
-        .debugbar_bottom_inner.__closed {
+        .debugbar_bottom.__closed .debugbar_bottom_inner{
             overflow: hidden;
             }
 /*        .debugbar_bottom_cnt {
@@ -85,9 +94,7 @@
                         }
                         .dm_col_cnt_h {
                             margin: 0 0 10px;
-                            font-family: 'Museo', Arial;
                             font-size: 20px;
-                            color: #67a9d4;
                             }
                         .dm_col_form {
                             }
@@ -101,22 +108,18 @@
                                     padding-top:2px;
                                     }
                                 .dm_form_row_check {
-                                    vertical-align: baseline;
+                                    float:left;
                                     }
                                 .dm_form_row_tip {
-                                    display: inline-block;
-                                    margin:0 30px 0 0;
+                                    display: block;
+                                    margin:0 30px 0 21px;
                                     padding-top:2px;
-                                    max-width: 170px;
-                                    vertical-align: top;
                                     }
                             .dm_form_row_controls {
                                 margin-top:10px;
                                 }
                                 .dm_form_hide {
                                     vertical-align: middle;
-                                    color: #999;
-                                    font-size: 12px;
                                     }
 
 
@@ -129,13 +132,10 @@
             border-style:solid;
             border-color:transparent #eee;
             }
-        .dm_control:hover{
-            background-color: #EEE;
-            }
-        .dm_control:hover .dm_control_menu{
-            opacity:1;
-            visibility: visible;
-            }
+            .dm_control:hover{
+                background-color: #EEE;
+                }
+
             .dm_control_menu{
                 position: absolute;
                 left: -10px;
@@ -147,6 +147,12 @@
                 visibility: hidden;
                 border:1px solid #eee;
                 }
+
+                .dm_control:hover .dm_control_menu{
+                    opacity:1;
+                    visibility: visible;
+                    }
+
                 .dm_control_menu_item{
                     padding:10px 20px;
                     border-bottom:1px solid #eee;
@@ -155,15 +161,12 @@
                 .dm_control_menu_item__last{
                     border-width:0px;
                     }
+
                 .dm_control_action{
                     padding-left:10px;
                     font-size:10px;
                     vertical-align: middle;
                     }
-
-
-
-
 
         .dm_resizer {
             position: absolute;
@@ -182,18 +185,23 @@
                 top:-7px;
                 left:50%;
                 margin-left: -15px;
-            }
+                }
+
         .dm_hider {
             position: absolute;
             top:3px;
             right:20px;
             border-bottom:1px dashed;
-            color: #4792D2;
             }
             .dm_hider:hover {
                 text-decoration: none;
                 border-bottom: none;
                 }
+            .debugbar_bottom.__closed .dm_hider {
+                top: -1px;
+                font-size: 11px;
+                }
+
 .dm_tooltip_w {
     position: fixed;
     top:20px;
@@ -243,14 +251,6 @@
     outline:5px solid red;
 }
 
-
-
-
-
-
-
-
-
 .dm_trouble_forms .source_example ul,
 .dm_trouble_forms .source_example ol{
     > *:not(li){
@@ -268,32 +268,62 @@
 .dm_trouble_forms .source_example textarea,
 .dm_trouble_forms .source_example input{
     outline:5px solid red;
-}
+    }
 .dm_trouble_forms .source_example input[type]{
     outline:none;
-}
+    }
 .dm_trouble_forms .source_example textarea[rows][cols]{
     outline:none;
-}
+    }
 .dm_trouble_forms .source_example input[type=submit]{
     outline:5px solid red;
-}
+    }
 .dm_trouble_forms .source_example input[type=submit][value]{
     outline:none;
-}
+    }
 
 .dm_trouble_forms .source_example [style]{
     outline:5px solid yellow;
-}
+    }
 
 .dm_trouble_forms .source_example [id]{
     outline:5px solid yellow;
-}
+    }
 
 .debugbar_bottom,
 .debugbar_bottom *{
     outline: none !important;
-}
+    }
 
+.dm_act-link_w {
+    position: relative;
+    }
+    .dm_act-link {
+        text-decoration: underline;
+        }
+        .dm_act-link:hover {
+            text-decoration: none;
+            }
+
+    .dm_act-link_aux {
+        display: none;
+        position: absolute;
+        top:0px;
+        left:100%;
+        padding-left: 10px;
+        font-size: 10px;
+        cursor: pointer;
+        }
+        .dm_act-link_w:hover .dm_act-link_aux {
+            display: block;
+            }
+
+.dm_act-btn {
+    cursor: pointer;
+    }
+
+.dm_hidden_cnt.__closed {
+    display: none;
+    }
 /* /Debugg styles
 ---------------------------------------------------------------------------------- */

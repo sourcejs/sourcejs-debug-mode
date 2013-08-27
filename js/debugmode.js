@@ -1,62 +1,91 @@
 /**
- * Debug mode - Sourcejs plugin for linting front-end code and debugging spec pages.
- *
- * Created by Anton Korochinsky.
- *
- * Mail: anton.korochinskiy@gmail.com , twitter: korochinskiy
+ * Created by Anton Korochinsky. 
+ * Mail: anton.korochinskiy@gmail.com , twitter: korochinskiy 
  * Date: 19.01.13
  */
 
 define([
     "core/options",
-    "plugins/debugmode/lib/jquery.cookie",
+    "plugins/lib/jquery.cookie",
     "modules/css"
-    ], function (options, cookie, Css) {
+    ], function (globalOptions, cookie, Css) {
 
-	function DmInitialize(pathToScript, pathToStyles){
-		var _this = this;
+    var debugmodeOptions = {
+    	pathToInspector: globalOptions.pluginsDir + 'debugmode/js/lib/htmlInspector/dist/html-inspector.js',
+    	pathToScript: globalOptions.pluginsDir + 'debugmode/js/dm.js',
+    	pathToStyles: 'debugmode/css/dm.css',
+        switchKeys: {
+            show: {
+                keyCode: '68',
+                specialKeys: ['ctrlKey']
+            },
+            maximize: {
+                keyCode: '68',
+                specialKeys: ['ctrlKey', 'shiftKey']
+            }
+        },
+        enableCriticalCheck: true
+    };
 
+	function DmInitialize(options) {
+		var _this = this,
+            isSpecialKeysPressed = function (event, keys) {
+                if (event && typeof keys == 'object') {
+                    var i,
+                        result = true;
+                    for (i = 0; i < keys.length; i++) {
+                        result = result && event[keys[i]];
+                    }
+                    return result;
+                } else {
+                    return false;
+                }
+            }
 		// path to script and style to load if dm will be switched on
-		this.pathToScript = pathToScript || options.pluginsDir + 'debugmode/js/dm.js';
-		this.pathToStyles = pathToStyles || 'debugmode/css/dm.css';
+		this.options = options;
+		this.pathToScript = options.pathToScript;
+		this.pathToStyles = options.pathToStyles;
 
 		// path to styles need to load necessary
 		this.pathToStartStyles = 'debugmode/css/debugmode.css';
 
-		this.switcherFeatures = {
+		this.switcherAttr = {
 			'class' : 'debugbar_corner',
 			'id' : 'dm_open',
 			'iconClass' : 'debugbar_corner_ic'
 		};
 
-		// bind some keys to open
-		// $(document).on('keydown', function(e){
-		// 	return false;
-		// 	if(e) {
-		// 		_this.switchMode();
-		// 	};
-		// 	return false;
-		// });
-
 		this.switcher = this.addDebugSwitcher();
 		this.debugmode = false;
+
+		$(document).on('keydown', function (e) {
+			if (e.keyCode == debugmodeOptions.switchKeys.maximize.keyCode && isSpecialKeysPressed(e, debugmodeOptions.switchKeys.maximize.specialKeys)) {
+				_this.switchMode(true);
+			} else if (e.keyCode == debugmodeOptions.switchKeys.show.keyCode && isSpecialKeysPressed(e, debugmodeOptions.switchKeys.show.specialKeys)) {
+				_this.switchMode();
+			}
+		});
+
+		if (this.options.enableCriticalCheck) {
+			this.runCriticalCheck();
+		};
 	};
 
 	// add layout of debugmode switcher
-	DmInitialize.prototype.addDebugSwitcher = function(){
+	DmInitialize.prototype.addDebugSwitcher = function () {
 		var
 			_this = this,
 			// create left panel switch off and on dm
 			switcher = $('<div />', {
-							'class'	: this.switcherFeatures.class,
-							'id'	: this.switcherFeatures.id,
+							'class'	: this.switcherAttr.class,
+							'id'	: this.switcherAttr.id,
 							click	:  function(){
 											_this.switchMode();
 										}
 						}).appendTo($(document.body)),
 
 			icon = $('<i />', {
-						'class'	: this.switcherFeatures.iconClass
+						'class'	: this.switcherAttr.iconClass
 					}).appendTo(switcher);
 
 		// load styles for dm switcher
@@ -66,30 +95,42 @@ define([
 	};
 
 	// switch mode off or on
-	DmInitialize.prototype.switchMode = function() {
+	DmInitialize.prototype.switchMode = function (needToMaximize) {
 		var _this = this;
 
 		if(!this.debugmode) {
 			// if object wasn't created
-			require([this.pathToScript], function(debugmode) {
+			require([_this.pathToScript], function(debugmode) {
 				// create object if script is loaded
 				_this.debugmode = debugmode;
-				_this.debugmode.initialize(_this.switcher, options, Css);
+				_this.debugmode.initialize(_this.switcher, globalOptions, _this.options);
 
 				//load styles for dm toolbars
-				new Css(_this.pathToStyles,options.pluginsDir);
+				new Css(_this.pathToStyles,globalOptions.pluginsDir);
 				// switch debuggmode on first time
-				return _this.debugmode.switchMode();
-			});
-
+				return _this.debugmode.switchMode(needToMaximize);
+			})
 		} else {
 			// switch on or off debugmode
-			return this.debugmode.switchMode();
-		};
+			return this.debugmode.switchMode(needToMaximize);
+		}
+	};
+
+	// run html inspector and log errors to console by default
+	DmInitialize.prototype.runCriticalCheck = function () {
+		var inspectorOptions = {
+				domRoot: '.' + globalOptions.exampleSectionClass
+			};
+
+		require([this.options.pathToInspector], function(){
+			setTimeout(function(){
+				HTMLInspector.inspect(inspectorOptions);
+			}, 1000);
+		});
 	};
 
 	$(function () {
-		new DmInitialize();
+		new DmInitialize(debugmodeOptions);
 	})
 
 })
