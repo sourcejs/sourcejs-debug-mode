@@ -19,18 +19,19 @@ Debugmode.prototype.initialize = function(paramSwitcher, globalOptions, options)
 };	
 
 // toggle mode
-Debugmode.prototype.switchMode = function(needToMaximize){
+Debugmode.prototype.switchMode = function(needToMaximize, runHtmlInspector){
 	if(this.inDebugmode){
 		this.offDebugMode();
 	} else {
-		this.runDebugMode(needToMaximize);
+		this.runDebugMode(needToMaximize, runHtmlInspector);
 	}
 };
 
 // switch debugmode on
-Debugmode.prototype.runDebugMode = function(needToMaximize){
+Debugmode.prototype.runDebugMode = function(needToMaximize, runHtmlInspector){
 	
     var options = {
+    	runHtmlInspector: runHtmlInspector,
 		needToMaximize: needToMaximize
 	};
 

@@ -1,7 +1,8 @@
-function HtmlInspector(pathToInspector, exampleSectionClass, tooltip) {
+function HtmlInspector (options, exampleSectionClass, tooltip, needToRun) {
 	var _this = this;
 
-	this.pathToInspector = pathToInspector;
+	this.options = options;
+	this.pathToInspector = options.pathToInspector;
 	this.inspectorOptions = {
 		domRoot: '.' + exampleSectionClass
 	};
@@ -23,6 +24,10 @@ function HtmlInspector(pathToInspector, exampleSectionClass, tooltip) {
 		_this.reset();
 		return false;
 	});
+
+	if (needToRun) {
+		this.run();
+	}
 };
 
 HtmlInspector.prototype.run = function () {
@@ -32,6 +37,15 @@ HtmlInspector.prototype.run = function () {
 	this.inspectorOptions = this.getOptions();
 
 	require([this.pathToInspector], function(){
+		if(_this.options.htmlInspectorRules) {
+			for(var rule in _this.options.htmlInspectorRules) {
+				rule = _this.options.htmlInspectorRules[rule];
+				if(rule) {
+					HTMLInspector.rules.add(rule.name, rule.config, rule.func);		
+				}
+			}
+		}
+
 		HTMLInspector.inspect(_this.inspectorOptions);	
 	});
 };

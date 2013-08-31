@@ -3,6 +3,7 @@ function DmToolbar(debugmode, globalOptions, options) {
 
 	this.options = globalOptions;
 	this.needToMaximize = options.needToMaximize;
+	this.runHtmlInspector = options.runHtmlInspector;
 	this.debugmode = debugmode;
 	// path to dm toolbar template
 	this.toolbarUrl = this.options.pluginsDir + 'debugmode/templates/toolbar.html';
@@ -86,7 +87,7 @@ DmToolbar.prototype.getToolbar = function(){
 	 		_this.resizer = new DmResizer($('#' + _this.toolbarControls.controls), _this.toolbar, $('#' + _this.toolbarControls.hider), $('#' + _this.toolbarControls.resizer), _this.needToMaximize);
 
 	 		// bind html inspector run to link click 
-	 		new HtmlInspector(_this.debugmode.options.pathToInspector, _this.options.exampleSectionClass, _this.tooltip);
+	 		new HtmlInspector(_this.debugmode.options, _this.options.exampleSectionClass, _this.tooltip, _this.runHtmlInspector);
 
 	 		// initilaize all forms in toolbar for showing troubles
 	 		_this.initilaizeForms();

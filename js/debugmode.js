@@ -12,6 +12,7 @@ define([
 
     var debugmodeOptions = {
     	pathToInspector: globalOptions.pluginsDir + 'debugmode/js/lib/htmlInspector/dist/html-inspector.js',
+    	pathToCriticalChecker: globalOptions.pluginsDir + 'debugmode/js/deffered/criticalChecker.js',
     	pathToScript: globalOptions.pluginsDir + 'debugmode/js/dm.js',
     	pathToStyles: 'debugmode/css/dm.css',
         switchKeys: {
@@ -24,7 +25,8 @@ define([
                 specialKeys: ['ctrlKey', 'shiftKey']
             }
         },
-        enableCriticalCheck: true
+        enableCriticalCheck: true,
+        htmlInspectorRules: {}
     };
 
 	function DmInitialize(options) {
@@ -95,7 +97,7 @@ define([
 	};
 
 	// switch mode off or on
-	DmInitialize.prototype.switchMode = function (needToMaximize) {
+	DmInitialize.prototype.switchMode = function (needToMaximize, runHtmlInspector) {
 		var _this = this;
 
 		if(!this.debugmode) {
@@ -108,24 +110,20 @@ define([
 				//load styles for dm toolbars
 				new Css(_this.pathToStyles,globalOptions.pluginsDir);
 				// switch debuggmode on first time
-				return _this.debugmode.switchMode(needToMaximize);
+				return _this.debugmode.switchMode(needToMaximize, runHtmlInspector);
 			})
 		} else {
 			// switch on or off debugmode
-			return this.debugmode.switchMode(needToMaximize);
+			return this.debugmode.switchMode(needToMaximize, runHtmlInspector);
 		}
 	};
 
 	// run html inspector and log errors to console by default
 	DmInitialize.prototype.runCriticalCheck = function () {
-		var inspectorOptions = {
-				domRoot: '.' + globalOptions.exampleSectionClass
-			};
+		var _this = this;
 
-		require([this.options.pathToInspector], function(){
-			setTimeout(function(){
-				HTMLInspector.inspect(inspectorOptions);
-			}, 1000);
+		require([this.options.pathToCriticalChecker], function(criticalChecker){
+			criticalChecker.initialize(debugmodeOptions.pathToInspector, globalOptions, _this);
 		});
 	};
 
