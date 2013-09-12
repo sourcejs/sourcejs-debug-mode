@@ -1,0 +1,6 @@
+.*
+*.dat
+*.iml
+
+/node_modules
+/js/lib
