@@ -14,11 +14,11 @@ define(["jquery", "modules/module"], function ($, module) {
 		this.dmInitializer = false;
 	};
 
-	CriticalChecker.prototype.initialize = function (pathToInspector, options, dmInitializer) {
+	CriticalChecker.prototype.initialize = function (debugmodeOptions, globalOptions, dmInitializer) {
 		var _this = this;
 
 		this.dmInitializer = dmInitializer;
-		this.inspectorOptions.domRoot = '.' + options.exampleSectionClass;
+		this.inspectorOptions.domRoot = '.' + globalOptions.exampleSectionClass;
 		this.inspectorOptions.onComplete = function(errors){
 			var count = 0;
 
@@ -34,10 +34,10 @@ define(["jquery", "modules/module"], function ($, module) {
 			}
 		};
 
-		require([pathToInspector], function () {
-			if(options.htmlInspectorRules) {
-				for(var rule in options.htmlInspectorRules) {
-					rule = options.htmlInspectorRules[rule];
+		require([debugmodeOptions.pathToInspector], function () {
+			if(debugmodeOptions.htmlInspectorRules.length) {
+				for(var i = 0; i <= debugmodeOptions.htmlInspectorRules.length; i++ ) {
+					rule = debugmodeOptions.htmlInspectorRules[i];
 					if(rule) {
 						HTMLInspector.rules.add(rule.name, rule.config, rule.func);		
 					}

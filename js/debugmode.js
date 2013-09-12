@@ -11,23 +11,33 @@ define([
     ], function (globalOptions, cookie, Css) {
 
     var debugmodeOptions = {
-    	pathToInspector: globalOptions.pluginsDir + 'debugmode/js/lib/htmlInspector/dist/html-inspector.js',
-    	pathToCriticalChecker: globalOptions.pluginsDir + 'debugmode/js/deffered/criticalChecker.js',
-    	pathToScript: globalOptions.pluginsDir + 'debugmode/js/dm.js',
-    	pathToStyles: 'debugmode/css/dm.css',
-        switchKeys: {
-            show: {
-                keyCode: '68',
-                specialKeys: ['ctrlKey']
-            },
-            maximize: {
-                keyCode: '68',
-                specialKeys: ['ctrlKey', 'shiftKey']
-            }
-        },
-        enableCriticalCheck: true,
-        htmlInspectorRules: {}
-    };
+	    	pathToInspector: globalOptions.pluginsDir + 'debugmode/js/lib/htmlInspector/dist/html-inspector.js',
+	    	pathToCriticalChecker: globalOptions.pluginsDir + 'debugmode/js/deffered/criticalChecker.js',
+	    	pathToScript: globalOptions.pluginsDir + 'debugmode/js/dm.js',
+	    	pathToStyles: 'debugmode/css/dm.css',
+	        switchKeys: {
+	            show: {
+	                keyCode: '68',
+	                specialKeys: ['ctrlKey']
+	            },
+	            maximize: {
+	                keyCode: '68',
+	                specialKeys: ['ctrlKey', 'shiftKey']
+	            }
+	        },
+	        enableCriticalCheck: true,
+	        htmlInspectorRules: {
+	        	// [
+	        	// 	{
+	        	// 		name: 'Rule name',
+	        	// 		config: ['rule','config'],
+	        	// 		func: 'processing function'
+	        	// 	}
+	        	// ]
+	        }
+    	};
+
+    $.extend(debugmodeOptions, globalOptions.pluginsOptions.debugmodeOptions);
 
 	function DmInitialize(options) {
 		var _this = this,
@@ -123,7 +133,7 @@ define([
 		var _this = this;
 
 		require([this.options.pathToCriticalChecker], function(criticalChecker){
-			criticalChecker.initialize(debugmodeOptions.pathToInspector, globalOptions, _this);
+			criticalChecker.initialize(debugmodeOptions, globalOptions, _this);
 		});
 	};
 
