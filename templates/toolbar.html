@@ -27,55 +27,6 @@
                             </form>
                         </div>
                     </li>
-                     <li class="dm_col">
-                        <div class="dm_col_cnt">
-                            <h6 class="dm_col_cnt_h">Ссылки</h6>
-                            <form class="dm_col_form dm_simple_form">
-                                <div class="dm_form_row">
-                                    <p class="dm_form_row_count" id="count_dt_l_no-title"></p>
-                                    <input type="checkbox" class="dm_form_row_check" id="dt_l_no-title"/>
-                                    <label class="dm_form_row_tip" for="dt_l_no-title">без title
-                                    </label>
-                                </div>
-                                 <div class="dm_form_row">
-                                    <p class="dm_form_row_count" id="count_dt_l_target"></p>
-                                    <input type="checkbox" class="dm_form_row_check" id="dt_l_target"/>
-                                    <label class="dm_form_row_tip" for="dt_l_target">с target</label>
-                                </div>
-                                 <div class="dm_form_row">
-                                    <p class="dm_form_row_count" id="count_dt_l_href"></p>
-                                    <input type="checkbox" class="dm_form_row_check" id="dt_l_href" />
-                                    <label class="dm_form_row_tip" for="dt_l_href">с неправильным href</label>
-                                </div>
-                                <div class="dm_form_row_controls">
-                                    <button type="submit" class="dm_form_row_submit">Показать</button>
-                                    <a href="#" class="dm_form_hide">скрыть</a>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li class="dm_col">
-                        <div class="dm_col_cnt">
-                            <h6 class="dm_col_cnt_h">Изображения</h6>
-                            <form class="dm_col_form dm_simple_form">
-                                <div class="dm_form_row">
-                                    <p class="dm_form_row_count" id="count_dt_img_title"></p>
-                                    <input type="checkbox" class="dm_form_row_check" id="dt_img_title"/>
-                                    <label class="dm_form_row_tip" for="dt_img_title">без title
-                                    </label>
-                                </div>
-                                 <div class="dm_form_row">
-                                    <p class="dm_form_row_count" id="count_dt_img_alt"></p>
-                                    <input type="checkbox" class="dm_form_row_check" id="dt_img_alt"/>
-                                    <label class="dm_form_row_tip" for="dt_img_alt">без alt</label>
-                                </div>
-                                <div class="dm_form_row_controls">
-                                    <button type="submit" class="dm_form_row_submit">Показать</button>
-                                    <a href="#" class="dm_form_hide">скрыть</a>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
                     <li class="dm_col">
                         <div class="dm_col_cnt">
                             <h6 class="dm_col_cnt_h">DOM</h6>
@@ -104,6 +55,23 @@
                                     <a href="#" class="dm_form_hide">скрыть</a>
                                 </div>
                             </form>
+                        </div>
+                    </li>
+                    <li class="dm_col">
+                        <div class="dm_col_cnt">
+                            <h6 class="dm_col_cnt_h">Ошибки разметки</h6>
+                            <form id="dm_html_inspector_form">
+                                <div class="dm_form_row">
+                                    <input type="checkbox" class="dm_form_row_check" id="dm_his_mark_elements" checked="checked"/>
+                                    <label for="dm_his_mark_elements">подсвечивать элементы</label>
+                                </div>
+                                <div class="dm_form_row_controls">
+                                    <button class="dm_act-btn" type="submit" id="dm_start_html_inspector">
+                                        Html inspector
+                                    </button>
+                                    <a href="#" class="dm_form_hide" type="reset">скрыть</a>
+                                </div>
+                            <form>
                         </div>
                     </li>
                 </ul>

@@ -20,3 +20,25 @@
         cursor: pointer;
         background-image:url('../i/debug.png');
         }
+
+.dm_critical_checker_alert {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 150px;
+    padding: 5px;
+    
+    font-size: 11px;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 4px #ccc;
+    
+    background-color: #f2dede;
+    border:1px solid #eed3d7;
+    border-radius:4px;
+    
+    z-index: 100;
+    }
+    .dm_critical_checker_alert.__hidden {
+        display: none;
+        }

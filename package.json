@@ -1,0 +1,15 @@
+{
+  "author": "Odnoklassniki front-end team",
+  "name": "Source.js",
+  "version": "0.2.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-replace": "~0.4.4",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "volo": {
+    "dependencies": {
+      "lib/htmlInspector": "github:philipwalton/html-inspector/0.4.1"
+    }
+  }
+}

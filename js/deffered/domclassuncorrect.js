@@ -94,8 +94,8 @@ DomClassUncorrect.prototype.showUncorrect = function(maxCount){
 			element.addClass(this.errorClass);
 
 			if(this.tooltip)
-				element.bind('mouseenter', {count:overClassedElements[i].count, self:_this}, _this.showTooltip)
-				  .bind('mouseleave', { self:_this}, _this.hideTooltip);
+				element.on('mouseenter', { text: this.errorMessage + overClassedElements[i].count, self: this.tooltip}, this.tooltip.show )
+				  	   .on('mouseleave', { self: this.tooltip }, this.tooltip.hide);
 		}
 		
 		// return count of elements with much more classes
@@ -120,8 +120,8 @@ DomClassUncorrect.prototype.hideUncorrect = function(){
 			element.removeClass(this.errorClass);
 
 			if (this.tooltip)
-				element.unbind('mouseenter', this.showTooltip)
-				  .unbind('mouseleave', this.hideTooltip);
+				element.off('mouseenter', this.tooltip.show)
+				  	   .off('mouseleave', this.tooltip.hide);
 		}
 	// else - find all elements in DOM by error class
 	} else {
@@ -137,19 +137,4 @@ DomClassUncorrect.prototype.hideUncorrect = function(){
 			})
 		}
 	}
-};
-
-DomClassUncorrect.prototype.showTooltip = function(event) {
-	event.data.self.tooltip.show(event.data.self.errorMessage + event.data.count);
-};
-
-DomClassUncorrect.prototype.hideTooltip = function(event) {
-	event.data.self.tooltip.hide();
-};
-
-DomClassUncorrect.prototype.unbindTooltipAppearence = function(element) {
-	// unbind from element tooltip appearence by hover
-	$(element)
-		.unbind('mouseenter', this.showTooltip)
-		.unbind('mouseleave', this.hideTooltip);
 };

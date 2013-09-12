@@ -61,8 +61,8 @@ LevelUncorrect.prototype.showUncorrect = function(level){
 		element.element.addClass(this.errorClass);
 
 		if(this.tooltip)
-			element.element.bind('mouseenter', {count:element.count, self: this}, this.showTooltip)
-			  .bind('mouseleave', { self: this}, this.hideTooltip);
+			element.element.on('mouseenter', { text:this.errorMessage + element.count, self: this.tooltip}, this.tooltip.show)
+						   .on('mouseleave', { self: this.tooltip}, this.tooltip.hide);
 	}
 
 	return {count:overLeveledElements.length,els:overLeveledElements}
@@ -81,8 +81,7 @@ LevelUncorrect.prototype.hideUncorrect = function(){
 			element.removeClass(this.errorClass);
 
 			if (this.tooltip)
-				this.unbindTooltipAppearence(element);
-				
+				this.tooltip.unbindAppearence(element);	
 		}
 	} else {
 		// find this elements again
@@ -91,9 +90,7 @@ LevelUncorrect.prototype.hideUncorrect = function(){
 
 		// unbind tooltip appearence
 		if (this.tooltip) {
-			elements.each(function(){
-				_this.unbindTooltipAppearence(this);
-			})
+			this.tooltip.unbindAppearence(elements);
 		}
 	}
 }
@@ -124,18 +121,3 @@ LevelUncorrect.prototype.getLevelCountOfElement = function(element,lastParentCla
 
 	return count;
 }
-
-LevelUncorrect.prototype.showTooltip = function(event) {
-	event.data.self.tooltip.show(event.data.self.errorMessage + event.data.count);
-};
-
-LevelUncorrect.prototype.hideTooltip = function(event) {
-	event.data.self.tooltip.hide();
-};
-
-LevelUncorrect.prototype.unbindTooltipAppearence = function(element) {
-	// unbind from element tooltip appearence by hover
-	$(element)
-		.unbind('mouseenter', this.showTooltip)
-		.unbind('mouseleave', this.hideTooltip);
-};
