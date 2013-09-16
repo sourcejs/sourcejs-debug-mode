@@ -6,12 +6,12 @@
 
 define([
     "core/options",
-    "plugins/lib/jquery.cookie",
+    "plugins/debugmode/lib/jquery-cookie/jquery.cookie",
     "modules/css"
     ], function (globalOptions, cookie, Css) {
 
     var debugmodeOptions = {
-	    	pathToInspector: globalOptions.pluginsDir + 'debugmode/js/lib/htmlInspector/dist/html-inspector.js',
+	    	pathToInspector: globalOptions.pluginsDir + 'debugmode/lib/htmlInspector/dist/html-inspector.js',
 	    	pathToCriticalChecker: globalOptions.pluginsDir + 'debugmode/js/deffered/criticalChecker.js',
 	    	pathToScript: globalOptions.pluginsDir + 'debugmode/js/dm.js',
 	    	pathToStyles: 'debugmode/css/dm.css',

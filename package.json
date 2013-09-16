@@ -9,7 +9,8 @@
   },
   "volo": {
     "dependencies": {
-      "debugmode/lib/htmlInspector": "github:philipwalton/html-inspector/0.4.1"
+      "debugmode/lib/htmlInspector": "github:philipwalton/html-inspector/0.4.1",
+      "debugmode/lib/jquery-cookie": "github:carhartl/jquery-cookie/v1.3.1"
     }
   }
 }
