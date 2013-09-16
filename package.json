@@ -9,7 +9,7 @@
   },
   "volo": {
     "dependencies": {
-      "lib/htmlInspector": "github:philipwalton/html-inspector/0.4.1"
+      "debugmode/lib/htmlInspector": "github:philipwalton/html-inspector/0.4.1"
     }
   }
 }
