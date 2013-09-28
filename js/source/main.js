@@ -14,7 +14,7 @@ var
 		hiError : 'dm_hi_error'
 	},
 	dmOtions = {
-		switchOffEvent : 'debugmodeSwitchOff1'
+		switchOffEvent : 'debugmodeSwitchOff'
 	};
 
 //@@debugmode
