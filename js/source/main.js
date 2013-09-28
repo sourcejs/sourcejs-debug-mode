@@ -6,28 +6,28 @@
 
 define(["jquery", "modules/module"], function ($, module) {
 
-// some options 
-var 
+// some options
+var
 	dmUtilityClasses = {
 		classError : 'dm_class_count_error',
 		domLevelError : 'dm_dom_level_error',
 		hiError : 'dm_hi_error'
 	},
 	dmOtions = {
-		switchOffEvent : 'debugmodeSwitchOff'
+		switchOffEvent : 'debugmodeSwitchOff1'
 	};
 
-@@debugmode
+//@@debugmode
 
-@@toolbar
+//@@toolbar
 
-@@sectionToolbar
+//@@sectionToolbar
 
-@@resizer
+//@@resizer
 
-@@tooltip
+//@@tooltip
 
-@@htmlInspector
+//@@htmlInspector
 
 return new Debugmode();
 

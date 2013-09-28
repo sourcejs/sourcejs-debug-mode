@@ -1,6 +1,6 @@
 {
-  "author": "Odnoklassniki front-end team",
-  "name": "Source.js",
+  "author": "Anon Korochinsky",
+  "name": "Debug Mode, plugin for Sourcejs.com ",
   "version": "0.2.0",
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -9,7 +9,6 @@
   },
   "volo": {
     "dependencies": {
-      "debugmode/lib/htmlInspector": "github:philipwalton/html-inspector/0.4.1",
       "debugmode/lib/jquery-cookie": "github:carhartl/jquery-cookie/v1.3.1"
     }
   }

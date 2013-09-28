@@ -4,6 +4,7 @@ module.exports = function(grunt) {
 		replace: {
   			dist: {
 				options: {
+                    prefix: '//@@',
 				  	variables: {
 				  		'debugmode': '<%= grunt.file.read("js/source/debugmode.js") %>',
 				    	'toolbar': '<%= grunt.file.read("js/source/toolbar.js") %>',
@@ -35,5 +36,5 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('runReplace', ['replace']);
 
-	grunt.registerTask('runWatch', ['watch:main']);	
+	grunt.registerTask('runWatch', ['watch:main']);
 };
